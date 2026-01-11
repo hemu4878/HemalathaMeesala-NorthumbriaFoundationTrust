@@ -114,30 +114,12 @@ public class SearchSteps
     [Then(@"I should see an appropriate message for empty search")]
     public async Task ThenIShouldSeeAppropriateMessageForEmptySearch()
     {
-        // Wait a bit to see if we navigate to results page
+        // Wait for the page to respond to empty search
         await Task.Delay(1000);
 
-        // Check if we got to the results page
+        // Verify the page navigated to results page (empty search is handled gracefully)
         var resultsPageExists = await _searchPage.Page.Locator("div#page-results").CountAsync() > 0;
-
-        if (resultsPageExists)
-        {
-            // The website navigates to results and shows "You might also be interested in..."
-            var pageContent = await _searchPage.Page.ContentAsync();
-
-            // Verify it shows the "You might also be interested in" section or similar helpful content
-            var hasHelpfulContent = pageContent.Contains("You might also be interested", StringComparison.OrdinalIgnoreCase) ||
-                                     pageContent.Contains("suggested", StringComparison.OrdinalIgnoreCase) ||
-                                     pageContent.Contains("page-results", StringComparison.OrdinalIgnoreCase);
-
-            hasHelpfulContent.Should().BeTrue("empty search should show helpful suggestions or results page");
-        }
-        else
-        {
-            // If it didn't navigate, verify the page is still functional
-            var url = _searchPage.Page.Url;
-            url.Should().NotBeNullOrEmpty("the page should respond to empty search gracefully");
-        }
+        resultsPageExists.Should().BeTrue("empty search should navigate to results page and handle gracefully");
     }
 
     [Then(@"the search should handle special characters gracefully")]
