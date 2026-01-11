@@ -1,5 +1,5 @@
 ﻿using NorthumbriaAutomation.Drivers;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using Microsoft.Playwright;
 
 namespace NorthumbriaAutomation.Hooks;
@@ -38,8 +38,8 @@ public sealed class Hooks
     }
 
     [AfterTestRun]
-    public static async Task AfterTestRun()
+    public static void AfterTestRun()
     {
-        await _browserDriver.CloseAsync();
+        _browserDriver.CloseAsync().GetAwaiter().GetResult();
     }
 }

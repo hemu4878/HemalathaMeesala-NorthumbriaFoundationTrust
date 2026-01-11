@@ -1,9 +1,12 @@
-﻿{
+{
     "language": {
         "feature": "en-us"
     },
     "bindingCulture": {
         "name": "en-us"
+    },
+    "runtime": {
+        "stopAtFirstError": false
     },
     "stepAssemblies": []
 }

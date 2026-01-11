@@ -2,7 +2,7 @@
 
 Comprehensive BDD Functional Acceptance Automation Test Suite for Northumbria NHS Website
 
-**Tech Stack:** .NET 8, C#, Playwright, SpecFlow
+**Tech Stack:** .NET 8, C#, Playwright, Reqnroll
 
 ## Overview
 
@@ -10,7 +10,7 @@ This project implements a robust test automation framework for the Northumbria N
 
 ## Features
 
-- **BDD/Gherkin Syntax** - Human-readable test scenarios using SpecFlow
+- **BDD/Gherkin Syntax** - Human-readable test scenarios using Reqnroll
 - **Page Object Model** - Clean, maintainable code structure
 - **Cross-Browser Support** - Chromium, Firefox, and Edge
 - **Parallel Execution** - Fast test execution
@@ -208,7 +208,7 @@ The test suite discovered and validates that the Northumbria NHS website has:
 - **.NET 8** - Latest .NET framework
 - **C# 12** - Modern C# features
 - **Playwright** - Modern browser automation
-- **SpecFlow** - BDD framework for .NET
+- **Reqnroll** - Free, open-source BDD framework for .NET
 - **FluentAssertions** - Readable assertions
 - **NUnit** - Test framework
 
