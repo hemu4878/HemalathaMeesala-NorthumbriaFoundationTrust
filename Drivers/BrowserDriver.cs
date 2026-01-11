@@ -31,6 +31,14 @@ public class BrowserDriver
         };
 
         _context = await _browser.NewContextAsync();
+
+        // Start trace recording
+        await _context.Tracing.StartAsync(new()
+        {
+            Screenshots = true,
+            Snapshots = true,
+            Sources = true
+        });
     }
 
     public async Task<IPage> CreateNewPageAsync()
@@ -41,7 +49,18 @@ public class BrowserDriver
     public async Task CloseAsync()
     {
         if (_context != null)
+        {
+            // Stop trace recording and save to file
+            var tracePath = Path.Combine(Directory.GetCurrentDirectory(), "traces", $"trace-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
+            Directory.CreateDirectory(Path.GetDirectoryName(tracePath)!);
+
+            await _context.Tracing.StopAsync(new()
+            {
+                Path = tracePath
+            });
+
             await _context.CloseAsync();
+        }
         if (_browser != null)
             await _browser.CloseAsync();
     }

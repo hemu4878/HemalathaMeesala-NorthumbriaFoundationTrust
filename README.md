@@ -189,6 +189,31 @@ Total tests: 11
   Duration: ~30-40s
 ```
 
+### Test Execution Screenshots
+
+![Test Execution](docs/screenshots/test-execution.png)
+*All 11 BDD scenarios executing and passing successfully*
+
+![Test Summary](docs/screenshots/all-tests-passing.png)
+*Test run summary showing 100% pass rate (11/11)*
+
+### Playwright Trace Files
+
+This project automatically generates **Playwright trace files** for every test run, providing an interactive timeline of test execution.
+
+**What's included in traces:**
+- 📸 Screenshots at every step
+- 🎬 DOM snapshots for time-travel debugging
+- 🔍 Network activity and console logs
+- 📊 Full execution timeline
+
+**View the sample trace:**
+1. Download: [Sample Trace File](docs/traces/sample-trace.zip)
+2. Open: https://trace.playwright.dev/
+3. Upload the trace file to view interactive execution
+
+**Trace files are generated** in the `traces/` folder after each test run.
+
 ## Important Findings
 
 ### Security Validation ✅
