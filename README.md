@@ -30,7 +30,7 @@ This project implements a robust test automation framework for the Northumbria N
    - Validates "no results" message display
 
 3. **Empty Search** (1 test)
-   - Validates helpful suggestions
+   - Validates graceful handling and page remains functional
 
 4. **Special Characters** (5 tests)
    - `@contact` - Special character handling
@@ -43,7 +43,7 @@ This project implements a robust test automation framework for the Northumbria N
 
 - ✅ Search functionality works correctly
 - ✅ Graceful error handling
-- ✅ Empty search provides helpful suggestions
+- ✅ Empty search handled gracefully without crashes
 - ✅ Special characters don't crash the site
 - ✅ XSS protection via Web Application Firewall
 - ✅ Unicode character support
@@ -243,40 +243,19 @@ The test suite discovered and validates that the Northumbria NHS website has:
 - Returns "Error 15 - Access Denied" for malicious input
 
 ### Edge Case Handling ✅
-- Empty searches show helpful "You might also be interested in..." suggestions
+- Empty searches are handled gracefully without crashes
 - Special characters are handled gracefully without crashes
 - Unicode characters (£) work correctly
 - No results display appropriate messaging
 
 ## Technologies Used
 
-- **.NET 8** - Latest .NET framework
-- **C# 12** - Modern C# features
-- **Playwright** - Modern browser automation
-- **Reqnroll** - Free, open-source BDD framework for .NET
-- **FluentAssertions** - Readable assertions
-- **NUnit** - Test framework
-
-## Best Practices Implemented
-
-- ✅ Page Object Model pattern
-- ✅ Async/await for all operations
-- ✅ Explicit waits with timeouts
-- ✅ Flexible assertions (handles multiple scenarios)
-- ✅ Clean separation of concerns
-- ✅ Readable Gherkin scenarios
-- ✅ Comprehensive error handling
-
-## Future Enhancements
-
-Potential areas for expansion:
-- Add more features (navigation, forms, etc.)
-- Implement screenshot on failure
-- Add HTML/Allure reporting
-- CI/CD pipeline integration (GitHub Actions, Azure DevOps)
-- API testing integration
-- Performance testing
-- Accessibility testing
+- **.NET 8**
+- **C#**
+- **Playwright**
+- **Reqnroll** - BDD framework for .NET
+- **FluentAssertions**
+- **NUnit**
 
 ## Troubleshooting
 
@@ -321,23 +300,6 @@ TearDown : System.InvalidOperationException : Only static OneTimeSetUp and OneTi
 
 **This is expected and does not affect test execution.** All tests still pass. Use `run-tests.cmd` for clean output and proper exit codes.
 
-## Contributing
-
-1. Create a feature branch
-2. Write tests following BDD principles
-3. Ensure all tests pass
-4. Submit pull request
-
-## License
-
-This project is for educational and testing purposes for Northumbria NHS Foundation Trust.
-
-## Contact
-
-For questions or issues, please contact the QA team.
-
 ---
 
-**Last Updated:** January 2026
-**Test Suite Version:** 1.0
 **Status:** ✅ All Tests Passing (11/11)

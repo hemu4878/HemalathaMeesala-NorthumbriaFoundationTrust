@@ -7,7 +7,7 @@ namespace NorthumbriaAutomation.Hooks;
 [Binding]
 public sealed class Hooks
 {
-    private static BrowserDriver _browserDriver = null!;
+    private static BrowserDriver? _browserDriver;
     private readonly ScenarioContext _scenarioContext;
 
     public Hooks(ScenarioContext scenarioContext)
