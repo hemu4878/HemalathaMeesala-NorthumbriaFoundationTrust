@@ -104,9 +104,24 @@ Edit `appsettings.json` to choose your browser:
 
 ### Run all tests
 
+**Option 1: Using the test runner script (Recommended)**
+
+Windows Command Prompt or PowerShell:
+```bash
+run-tests.cmd
+```
+
+Or directly with PowerShell:
+```powershell
+powershell -ExecutionPolicy Bypass -File run-tests.ps1
+```
+
+**Option 2: Using dotnet CLI**
 ```bash
 dotnet test
 ```
+
+> **Note:** When using `dotnet test` directly, you may see a teardown warning message at the end. This is a known Reqnroll/NUnit compatibility issue and doesn't affect test execution. All tests will still pass. The `run-tests.cmd` script handles this automatically and returns proper exit codes.
 
 ### Run specific test tags
 
@@ -143,12 +158,15 @@ NorthumbriaAutomation/
 ├── StepDefinitions/
 │   └── SearchSteps.cs              # Step implementations
 ├── Pages/
-│   └── SearchPage.cs               # Page Object Model
+│   └── SearchPage.cs               # Page Object Model (with stable selectors)
 ├── Drivers/
 │   └── BrowserDriver.cs            # Browser management
 ├── Hooks/
 │   └── Hooks.cs                    # Test setup/teardown
 ├── appsettings.json                # Configuration
+├── reqnroll.json                   # Reqnroll configuration
+├── run-tests.cmd                   # Test runner script (Windows)
+├── run-tests.ps1                   # PowerShell test runner
 ├── NorthumbriaAutomation.csproj    # Project file
 └── README.md                       # This file
 ```
@@ -157,11 +175,14 @@ NorthumbriaAutomation/
 
 ### Page Object Model
 
-`SearchPage.cs` - Encapsulates search page elements and actions
+`SearchPage.cs` - Encapsulates search page elements and actions using **stable selectors**
+- Uses `input[name='query'].search-field` selector (resilient to dynamic ID changes)
 - `NavigateToHomeAsync()` - Navigate to homepage
 - `EnterSearchTermAsync()` - Enter search term
 - `ClickSearchButtonAsync()` - Click search button
 - `ClickSearchButtonWithoutNavigationAsync()` - Click for edge cases
+
+**Why stable selectors?** The search field's ID is dynamically generated (e.g., `search-query-carousel-40618`), so we use the stable `name` and `class` attributes instead.
 
 ### Step Definitions
 
@@ -274,6 +295,32 @@ dotnet build
 
 ### Tests failing on browser launch
 Check `appsettings.json` browser configuration and ensure Playwright browsers are installed.
+
+### PowerShell execution policy error
+If you get "script cannot be loaded" error when running `run-tests.ps1`:
+
+**Solution 1:** Use the batch file wrapper
+```bash
+run-tests.cmd
+```
+
+**Solution 2:** Run with bypass flag
+```powershell
+powershell -ExecutionPolicy Bypass -File run-tests.ps1
+```
+
+**Solution 3:** Change execution policy (permanent)
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### Teardown warning in dotnet test output
+When running `dotnet test`, you may see:
+```
+TearDown : System.InvalidOperationException : Only static OneTimeSetUp and OneTimeTearDown are allowed for InstancePerTestCase mode.
+```
+
+**This is expected and does not affect test execution.** All tests still pass. Use `run-tests.cmd` for clean output and proper exit codes.
 
 ## Contributing
 

@@ -8,5 +8,11 @@
     "runtime": {
         "stopAtFirstError": false
     },
+    "generator": {
+        "addNonParallelizableMarkerForTags": [],
+        "features": {
+            "generateAsyncTests": true
+        }
+    },
     "stepAssemblies": []
 }

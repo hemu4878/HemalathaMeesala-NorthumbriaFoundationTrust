@@ -7,7 +7,7 @@ namespace NorthumbriaAutomation.Hooks;
 [Binding]
 public sealed class Hooks
 {
-    private static BrowserDriver _browserDriver;
+    private static BrowserDriver _browserDriver = null!;
     private readonly ScenarioContext _scenarioContext;
 
     public Hooks(ScenarioContext scenarioContext)
@@ -35,11 +35,5 @@ public sealed class Hooks
         {
             await page.CloseAsync();
         }
-    }
-
-    [AfterTestRun]
-    public static void AfterTestRun()
-    {
-        _browserDriver.CloseAsync().GetAwaiter().GetResult();
     }
 }

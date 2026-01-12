@@ -21,7 +21,7 @@ public class SearchPage
 
     public async Task EnterSearchTermAsync(string term)
     {
-        await _page.Locator("//*[@id=\"search-query-carousel-40618\"]").FillAsync(term);
+        await _page.Locator("input[name='query'].search-field").FillAsync(term);
     }
 
     public async Task ClickSearchButtonAsync()
