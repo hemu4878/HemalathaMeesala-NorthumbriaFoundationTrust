@@ -13,7 +13,6 @@ This project implements a robust test automation framework for the Northumbria N
 - **BDD/Gherkin Syntax** - Human-readable test scenarios using Reqnroll
 - **Page Object Model** - Clean, maintainable code structure
 - **Cross-Browser Support** - Chromium, Firefox, and Edge
-- **Parallel Execution** - Fast test execution
 - **Security Testing** - XSS protection validation
 - **Edge Case Coverage** - Special characters, empty search, Unicode support
 
