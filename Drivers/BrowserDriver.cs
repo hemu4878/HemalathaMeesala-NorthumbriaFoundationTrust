@@ -51,7 +51,9 @@ public class BrowserDriver
         if (_context != null)
         {
             // Stop trace recording and save to file
-            var tracePath = Path.Combine(Directory.GetCurrentDirectory(), "traces", $"trace-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
+            // Get the project root directory (3 levels up from bin/Debug/net8.0)
+            var projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", ".."));
+            var tracePath = Path.Combine(projectRoot, "traces", $"trace-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
             Directory.CreateDirectory(Path.GetDirectoryName(tracePath)!);
 
             await _context.Tracing.StopAsync(new()

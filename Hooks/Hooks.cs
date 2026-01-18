@@ -21,6 +21,15 @@ public sealed class Hooks
         _browserDriver = new BrowserDriver();
     }
 
+    [AfterTestRun]
+    public static async Task AfterTestRun()
+    {
+        if (_browserDriver != null)
+        {
+            await _browserDriver.CloseAsync();
+        }
+    }
+
     [BeforeScenario(Order = 1)]
     public async Task BeforeScenario()
     {
