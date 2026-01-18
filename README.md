@@ -2,7 +2,7 @@
 
 Comprehensive BDD Functional Acceptance Automation Test Suite for Northumbria NHS Website
 
-**Tech Stack:** .NET 8, C#, Playwright, Reqnroll
+**Tech Stack:** .NET 8, C#, Playwright, Reqnroll 3.3.2
 
 ## Overview
 
@@ -103,24 +103,9 @@ Edit `appsettings.json` to choose your browser:
 
 ### Run all tests
 
-**Option 1: Using the test runner script (Recommended)**
-
-Windows Command Prompt or PowerShell:
-```bash
-run-tests.cmd
-```
-
-Or directly with PowerShell:
-```powershell
-powershell -ExecutionPolicy Bypass -File run-tests.ps1
-```
-
-**Option 2: Using dotnet CLI**
 ```bash
 dotnet test
 ```
-
-> **Note:** When using `dotnet test` directly, you may see a teardown warning message at the end. This is a known Reqnroll/NUnit compatibility issue and doesn't affect test execution. All tests will still pass. The `run-tests.cmd` script handles this automatically and returns proper exit codes.
 
 ### Run specific test tags
 
@@ -161,11 +146,10 @@ NorthumbriaAutomation/
 ├── Drivers/
 │   └── BrowserDriver.cs            # Browser management
 ├── Hooks/
-│   └── Hooks.cs                    # Test setup/teardown
+│   └── Hooks.cs                    # Test setup/teardown with tracing
+├── traces/                         # Playwright trace files (auto-generated)
 ├── appsettings.json                # Configuration
 ├── reqnroll.json                   # Reqnroll configuration
-├── run-tests.cmd                   # Test runner script (Windows)
-├── run-tests.ps1                   # PowerShell test runner
 ├── NorthumbriaAutomation.csproj    # Project file
 └── README.md                       # This file
 ```
@@ -253,7 +237,7 @@ The test suite discovered and validates that the Northumbria NHS website has:
 - **.NET 8**
 - **C#**
 - **Playwright**
-- **Reqnroll** - BDD framework for .NET
+- **Reqnroll 3.3.2** - BDD framework for .NET
 - **FluentAssertions**
 - **NUnit**
 
@@ -273,32 +257,6 @@ dotnet build
 
 ### Tests failing on browser launch
 Check `appsettings.json` browser configuration and ensure Playwright browsers are installed.
-
-### PowerShell execution policy error
-If you get "script cannot be loaded" error when running `run-tests.ps1`:
-
-**Solution 1:** Use the batch file wrapper
-```bash
-run-tests.cmd
-```
-
-**Solution 2:** Run with bypass flag
-```powershell
-powershell -ExecutionPolicy Bypass -File run-tests.ps1
-```
-
-**Solution 3:** Change execution policy (permanent)
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-### Teardown warning in dotnet test output
-When running `dotnet test`, you may see:
-```
-TearDown : System.InvalidOperationException : Only static OneTimeSetUp and OneTimeTearDown are allowed for InstancePerTestCase mode.
-```
-
-**This is expected and does not affect test execution.** All tests still pass. Use `run-tests.cmd` for clean output and proper exit codes.
 
 ---
 
